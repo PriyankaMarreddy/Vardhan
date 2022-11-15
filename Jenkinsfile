@@ -9,9 +9,23 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/PriyankaMarreddy/Vardhan.git'
             }
         }
-        stage("Build") {
+        environment {
+            CI = 'true'
+        }
+        stage('Build') {
             steps {
-                sh "npm run build"
+                sh 'npm install'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh './jenkins/scripts/test.sh'
+            }
+        }
+        stage('Deliver') {
+            steps {
+                sh './jenkins/scripts/deliver.sh'
+                sh './jenkins/scripts/kill.sh'
             }
         }
     }
