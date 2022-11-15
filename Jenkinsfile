@@ -9,9 +9,6 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/PriyankaMarreddy/Vardhan.git'
             }
         }
-        environment {
-            CI = 'true'
-        }
         stage('Build') {
             steps {
                 sh 'npm install'
